@@ -1,0 +1,18 @@
+{# ==========================================================
+   Linha-rio decorativa em SVG. Motivo de fundo da marca.
+   Parâmetros: cor (padrão gradiente marca->ciano), opacidade, altura_classe.
+   ========================================================== #}
+<svg viewBox="0 0 1800 200" preserveAspectRatio="none" aria-hidden="true" class="pointer-events-none absolute inset-x-0 {{ altura_classe|default('h-[230px]') }}" style="opacity:{{ opacidade|default(0.5) }}">
+	{% if gradiente|default(true) %}
+		<defs>
+			<linearGradient id="{{ id|default('meandro') }}" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1800" y2="200">
+				<stop offset="0" stop-color="#063A2F"/>
+				<stop offset="0.55" stop-color="#0E8E7E"/>
+				<stop offset="1" stop-color="#00E5FF"/>
+			</linearGradient>
+		</defs>
+		<path d="{{ meandro(1800, 200, 9, 60) }}" fill="none" stroke="url(#{{ id|default('meandro') }})" stroke-width="{{ espessura|default(3) }}" stroke-linecap="round"/>
+	{% else %}
+		<path d="{{ meandro(1800, 200, 9, 60) }}" fill="none" stroke="{{ cor|default('#00E5FF') }}" stroke-width="{{ espessura|default(2.5) }}" stroke-linecap="round"/>
+	{% endif %}
+</svg>

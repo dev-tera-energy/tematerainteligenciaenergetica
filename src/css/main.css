@@ -1,0 +1,326 @@
+/* ============================================================
+   TERA · Tema WordPress - Sistema Visual (Tailwind v4)
+   Fonte de verdade: design system (_ds/.../tokens/*.css e
+   components.css) do projeto Claude Design "Site Tera.dc.html".
+   Os tokens abaixo viram utilities do Tailwind (bg-green, text-cyan...)
+   via @theme; os componentes de marca (.tera-btn, .tera-card, .t-eyebrow...)
+   são portados quase literalmente do design system, para manter fidelidade.
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import 'tailwindcss';
+
+/* Twig e PHP não são varridos por padrão pelo Tailwind v4. */
+@source '../../views/**/*.twig';
+@source '../../inc/**/*.php';
+@source '../../controllers/**/*.php';
+@source '../../*.php';
+
+@theme {
+  /* ---------- Marca ---------- */
+  --color-green: #063a2f;
+  --color-green-900: #042a22;
+  --color-green-700: #0a5544;
+  --color-green-600: #0e7060;
+  --color-green-500: #0e8e7e;
+  --color-green-tint: #ecf4f1;
+  --color-cyan: #00e5ff;
+  --color-cyan-600: #00b8cc;
+  --color-cyan-tint: #e5fbff;
+
+  /* ---------- Neutros ---------- */
+  --color-ink: #1e293b;
+  --color-night: #0f1f1a;
+  --color-paper: #fbfcfb;
+
+  /* ---------- Texto semântico (mesmos tokens de colors.css) ---------- */
+  --color-strong: #1e293b;
+  --color-body: #334155;
+  --color-muted: #64748b;
+  --color-subtle: #94a3b8;
+
+  /* ---------- Tipografia ---------- */
+  --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* ---------- Layout ---------- */
+  --spacing-nav: 76px;
+  --spacing-section: 118px;
+
+  /* ---------- Movimento de rio ---------- */
+  --ease-flow: cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+/* ============================================================
+   Tokens semânticos do design system, na nomenclatura original
+   (--tera-*, --text-*, --border-*, --surface-*, --r-*, --sh-*, --dur-*).
+   components.css e as views usam esses nomes diretamente.
+   ============================================================ */
+:root {
+  --tera-green: #063a2f;
+  --tera-cyan: #00e5ff;
+  --tera-slate: #1e293b;
+
+  --green-900: #042a22;
+  --green-800: #063a2f;
+  --green-700: #0a5544;
+  --green-600: #0e7060;
+  --green-500: #0e8e7e;
+  --green-tint: #ecf4f1;
+
+  --cyan-600: #00b8cc;
+  --cyan-500: #00e5ff;
+  --cyan-tint: #e5fbff;
+
+  --slate-900: #0f1f1a;
+  --slate-800: #1e293b;
+  --slate-700: #334155;
+  --slate-500: #64748b;
+  --slate-400: #94a3b8;
+  --slate-300: #cbd5e1;
+  --slate-200: #e2e8f0;
+  --slate-100: #f1f5f4;
+  --slate-50: #f8faf9;
+  --paper: #fbfcfb;
+
+  --grad-meandro: linear-gradient(110deg, #063a2f 0%, #0e8e7e 55%, #00e5ff 100%);
+  --grad-text: linear-gradient(100deg, #0e7060, #00e5ff);
+
+  --surface-page: var(--paper);
+  --surface-card: #ffffff;
+  --surface-sunken: var(--slate-50);
+  --surface-brand: var(--tera-green);
+  --surface-brand-soft: var(--green-tint);
+  --surface-accent-soft: var(--cyan-tint);
+  --surface-inverse: var(--slate-900);
+
+  --text-strong: var(--tera-slate);
+  --text-body: var(--slate-700);
+  --text-muted: var(--slate-500);
+  --text-subtle: var(--slate-400);
+  --text-brand: var(--tera-green);
+  --text-brand-alt: var(--green-700);
+  --text-on-brand: #ffffff;
+  --text-on-brand-muted: #9fd6c8;
+  --text-on-brand-faint: #6fb3a4;
+  --text-accent: var(--cyan-600);
+
+  --border-subtle: var(--slate-200);
+  --border-strong: var(--slate-300);
+  --border-brand: var(--tera-green);
+  --border-on-brand: rgba(255, 255, 255, 0.12);
+
+  --link: var(--green-700);
+  --link-hover: var(--tera-green);
+  --link-on-dark: #dcefe9;
+  --link-on-dark-hover: var(--tera-cyan);
+
+  /* espaçamento e layout */
+  --maxw: 1200px;
+  --gutter: 32px;
+  --nav-h: 76px;
+  --section-y: 118px;
+
+  /* raios */
+  --r-md: 11px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+  --r-2xl: 20px;
+  --r-3xl: 22px;
+  --r-pill: 999px;
+
+  /* sombras — sempre esverdeadas, nunca cinza neutro */
+  --sh-lg: 0 22px 44px -26px rgba(6, 58, 47, 0.4);
+  --sh-xl: 0 40px 80px -40px rgba(6, 58, 47, 0.4);
+  --sh-cyan: 0 14px 30px -10px rgba(0, 229, 255, 0.5);
+  --sh-green: 0 14px 30px -12px rgba(6, 58, 47, 0.6);
+
+  /* tipografia */
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-extrabold: 800;
+  --ls-eyebrow: 0.2em;
+
+  /* movimento — imita o rio: entra suave, assenta sem quicar */
+  --dur-fast: 150ms;
+  --dur-base: 200ms;
+  --dur-slow: 300ms;
+  --dur-reveal: 700ms;
+  --lift: translateY(-2px);
+  --lift-card: translateY(-3px);
+}
+
+@layer base {
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    color: var(--text-strong);
+    background: var(--surface-page);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    margin: 0;
+    font-family: var(--font-display);
+    letter-spacing: -0.025em;
+    line-height: 1.12;
+    color: var(--text-strong);
+  }
+
+  a { color: var(--link); text-decoration: none; }
+  a:hover { color: var(--link-hover); }
+  .on-dark a, a.on-dark { color: var(--link-on-dark); }
+  .on-dark a:hover, a.on-dark:hover { color: var(--link-on-dark-hover); }
+
+  img, svg { display: block; max-width: 100%; }
+
+  /* Contêiner de conteúdo e seção padrão da landing (design system). */
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
+  .section { padding: var(--section-y) 0; position: relative; }
+
+  /* Foco de input: borda verde + anel ciano de 3px. */
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--tera-green);
+    box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.18);
+  }
+}
+
+/* ============================================================
+   Componentes de marca — portados de components.css e
+   typography.css do design system, quase sem alteração.
+   ============================================================ */
+@layer components {
+  /* ---------------- EYEBROW E GRADIENTE DE TEXTO ---------------- */
+  .t-eyebrow {
+    font-family: var(--font-mono); font-size: 13px;
+    letter-spacing: var(--ls-eyebrow); text-transform: uppercase;
+    color: var(--text-brand-alt); font-weight: var(--fw-medium);
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .t-eyebrow::before { content: ''; width: 22px; height: 2px; background: var(--tera-cyan); }
+  .t-eyebrow.on-dark { color: var(--tera-cyan); }
+
+  .t-grad { background: var(--grad-text); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  /* ---------------- BOTÕES ---------------- */
+  .tera-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--font-body); font-weight: var(--fw-semibold);
+    font-size: 15px; padding: 14px 26px; border-radius: var(--r-lg);
+    cursor: pointer; border: 1px solid transparent; white-space: nowrap;
+    transition: transform var(--dur-fast), box-shadow var(--dur-fast),
+                background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
+  }
+  .tera-btn .arr { transition: transform var(--dur-fast); }
+  .tera-btn:hover .arr { transform: translateX(3px); }
+
+  .tera-btn--primary { background: var(--tera-green); color: #fff; }
+  .tera-btn--primary:hover { box-shadow: var(--sh-green); transform: var(--lift); color: #fff; }
+
+  .tera-btn--cyan { background: var(--tera-cyan); color: var(--tera-green); }
+  .tera-btn--cyan:hover { box-shadow: var(--sh-cyan); transform: var(--lift); color: var(--tera-green); }
+
+  .tera-btn--ghost { background: transparent; color: var(--text-strong); border-color: var(--border-strong); }
+  .tera-btn--ghost:hover { border-color: var(--tera-green); color: var(--tera-green); }
+
+  .tera-btn--ghost-dark { background: transparent; color: #fff; border-color: rgba(255, 255, 255, 0.28); }
+  .tera-btn--ghost-dark:hover { border-color: var(--tera-cyan); color: var(--tera-cyan); }
+
+  .tera-btn--sm { padding: 10px 17px; font-size: 14px; border-radius: var(--r-md); }
+
+  /* ---------------- TAG MONO ---------------- */
+  .tera-tag {
+    display: inline-flex; align-items: center;
+    font-family: var(--font-mono); font-size: 11.5px;
+    color: var(--text-brand-alt); background: var(--surface-brand-soft);
+    border: 1px solid #d3e7e0; padding: 5px 11px; border-radius: var(--r-pill);
+  }
+
+  /* ---------------- CARDS ---------------- */
+  .tera-card {
+    background: var(--surface-card); border: 1px solid var(--border-subtle);
+    border-radius: var(--r-xl);
+  }
+  .tera-card--hover { transition: border-color var(--dur-base), transform var(--dur-base), box-shadow var(--dur-base); }
+  .tera-card--hover:hover { border-color: var(--tera-green); transform: var(--lift-card); box-shadow: var(--sh-lg); }
+
+  /* ---------------- FORMULÁRIO ---------------- */
+  .tera-field { margin-bottom: 15px; }
+  .tera-field label {
+    display: block; font-size: 12.5px; font-weight: var(--fw-semibold);
+    color: var(--text-body); margin-bottom: 7px;
+  }
+  .tera-input {
+    width: 100%; height: 50px; border: 1px solid var(--border-subtle);
+    border-radius: var(--r-md); padding: 0 15px; font-family: var(--font-body);
+    font-size: 14.5px; color: var(--text-strong); background: var(--surface-page);
+    transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+  }
+  .tera-input::placeholder { color: var(--text-subtle); }
+
+  /* ---------------- ETAPAS NUMERADAS (trilha horizontal) ---------------- */
+  .tera-step { position: relative; padding-top: 30px; }
+  .tera-step__line { position: absolute; top: 13px; left: 0; right: 0; height: 2px; background: var(--border-subtle); }
+  .tera-step__dot {
+    position: absolute; top: 6px; left: 0; width: 16px; height: 16px; border-radius: 50%;
+    background: #fff; border: 3px solid var(--tera-cyan);
+  }
+  .tera-step__n { font-family: var(--font-mono); font-size: 13px; color: var(--text-brand-alt); letter-spacing: 0.08em; margin-bottom: 14px; }
+  .tera-step h3 { font-size: 20px; font-weight: var(--fw-bold); margin-bottom: 10px; }
+  .tera-step p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+  /* ---------------- NAVBAR ---------------- */
+  .tera-nav {
+    position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); z-index: 100;
+    display: flex; align-items: center; background: rgba(251, 252, 251, 0.82);
+    backdrop-filter: blur(14px); border-bottom: 1px solid transparent;
+    transition: border-color var(--dur-base), background var(--dur-base);
+  }
+  .tera-nav--scrolled { border-color: var(--border-subtle); }
+  .tera-nav a:not(.tera-btn) { font-size: 14.5px; font-weight: var(--fw-medium); color: var(--text-body); }
+  .tera-nav a:not(.tera-btn):hover { color: var(--tera-green); }
+
+  /* Reveal ao rolar. A classe .in é adicionada por src/js/reveal.js. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition:
+      opacity var(--dur-reveal) var(--ease-flow),
+      transform var(--dur-reveal) var(--ease-flow);
+  }
+  .reveal.in { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* Conteúdo vindo do editor do WordPress (the_content).
+   O corpo do artigo é a única parte do site que não é markup nosso. */
+@layer components {
+  .prose-tera > * + * { margin-top: 20px; }
+  .prose-tera p { font-size: 17.5px; line-height: 1.8; color: var(--text-body); }
+  .prose-tera h2 {
+    font-family: var(--font-display); font-weight: 700; font-size: 27px;
+    letter-spacing: -0.025em; line-height: 1.2; margin-top: 42px; margin-bottom: 16px;
+  }
+  .prose-tera h3 {
+    font-family: var(--font-display); font-weight: 700; font-size: 21px;
+    letter-spacing: -0.02em; margin-top: 34px; margin-bottom: 12px;
+  }
+  .prose-tera ul, .prose-tera ol { padding-left: 24px; display: flex; flex-direction: column; gap: 12px; }
+  .prose-tera li { font-size: 17px; line-height: 1.7; }
+  .prose-tera a { color: var(--text-brand-alt); text-decoration: underline; text-decoration-color: var(--tera-cyan); text-underline-offset: 3px; }
+  .prose-tera a:hover { color: var(--tera-green); }
+  .prose-tera blockquote {
+    margin: 30px 0; padding: 22px 26px; border-left: 3px solid var(--tera-cyan);
+    background: var(--cyan-tint); border-radius: 0 14px 14px 0;
+  }
+  .prose-tera blockquote p { font-size: 16.5px; line-height: 1.7; }
+  .prose-tera img { border-radius: 18px; }
+  .prose-tera figcaption { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); margin-top: 10px; }
+}

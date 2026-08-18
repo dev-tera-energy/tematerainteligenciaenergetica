@@ -1,0 +1,30 @@
+{# ==========================================================
+   Base do documento. Todas as páginas estendem este arquivo.
+   Blocos: head_extra (meta por página), content (corpo).
+   ========================================================== #}
+<!doctype html>
+<html {{ function('language_attributes') }}>
+<head>
+	<meta charset="{{ function('bloginfo', 'charset') }}">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	{% block head_extra %}{% endblock %}
+	{{ function('wp_head') }}
+</head>
+<body class="bg-paper text-ink font-body antialiased {{ function('body_class') }}">
+	{{ function('wp_body_open') }}
+
+	<a href="#conteudo-principal" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-green focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
+		Pular para o conteúdo
+	</a>
+
+	{% include 'partials/navbar.twig' %}
+
+	<main id="conteudo-principal" class="pt-nav">
+		{% block content %}{% endblock %}
+	</main>
+
+	{% include 'partials/footer.twig' %}
+
+	{{ function('wp_footer') }}
+</body>
+</html>

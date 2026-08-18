@@ -1,0 +1,268 @@
+{% extends 'base.twig' %}
+{% block content %}
+
+<section id="inicio" class="relative overflow-hidden pt-[88px] pb-[72px]">
+	{% include 'partials/meandro.twig' with { id: 'home-hero', altura_classe: 'h-[230px] top-1/2', opacidade: 0.5 } %}
+
+	<div class="wrap relative z-[2]">
+		<div class="max-w-[760px]">
+			<div class="mb-6.5 inline-flex items-center gap-2.5 rounded-full border border-[#D3E7E0] bg-green-tint px-3.5 py-1.5 font-mono text-[12.5px] tracking-[0.03em] text-green-700">
+				<span class="h-[7px] w-[7px] rounded-full bg-cyan shadow-[0_0_0_4px_rgba(0,229,255,0.18)]"></span>
+				Inteligência energética · Manaus · AM
+			</div>
+			<h1 class="text-balance text-[58px] font-extrabold leading-[1.05] tracking-[-0.03em]">
+				Energia inteligente para um <span class="t-grad">futuro sustentável.</span>
+			</h1>
+			<p class="text-pretty mt-6 mb-8 max-w-[58ch] text-lg leading-relaxed text-body">
+				A Tera transforma dados, engenharia e tecnologia em decisões sobre energia. E publica o que aprende: cada diagnóstico vira conteúdo que ajuda você a entender a própria conta de luz antes mesmo de nos contratar.
+			</p>
+			<div class="flex flex-wrap gap-4">
+				<a href="{{ contato_url }}" class="tera-btn tera-btn--primary">Quero um diagnóstico <span class="arr">→</span></a>
+				<a href="{{ blog_url }}" class="tera-btn tera-btn--ghost">Ler o conteúdo <span class="arr">→</span></a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="border-y border-slate-200 bg-white">
+	<div class="wrap grid grid-cols-2 md:grid-cols-4">
+		{% for numero in numeros %}
+			<div class="border-r border-slate-200 py-8 text-center last:border-r-0">
+				<div class="text-[34px] font-extrabold tracking-[-0.03em] text-green">{{ numero.valor }}</div>
+				<div class="mt-1.5 text-[13px] text-muted">{{ numero.rotulo }}</div>
+			</div>
+		{% endfor %}
+	</div>
+</section>
+
+<section id="conteudo" class="section" style="scroll-margin-top:76px">
+	<div class="wrap">
+		<div class="mb-11 flex flex-wrap items-end justify-between gap-8">
+			<div class="max-w-[640px]">
+				{% include 'partials/eyebrow.twig' with { texto: 'Do conteúdo' } %}
+				<h2 class="text-balance mt-5 mb-4 text-[44px] font-bold leading-[1.08] tracking-[-0.025em]">O que a Tera aprende, a Tera publica.</h2>
+				<p class="text-[17px] leading-relaxed text-muted">Antes de vender um serviço, a Tera explica energia. Artigos técnicos, boletins de tarifa e um glossário para quem paga a conta.</p>
+			</div>
+			<a href="{{ blog_url }}" class="tera-btn tera-btn--ghost shrink-0">Ver todo o conteúdo</a>
+		</div>
+
+		{% if post_destaque %}
+			<div class="mb-6.5 grid grid-cols-1 gap-6.5 lg:grid-cols-[1.15fr_0.85fr]">
+				<a href="{{ post_destaque.link }}" class="tera-card tera-card--hover flex flex-col overflow-hidden rounded-[22px]">
+					<div class="relative flex min-h-[220px] items-center justify-center bg-green">
+						{% if post_destaque.thumbnail %}
+							<img src="{{ post_destaque.thumbnail.src('tera-hero') }}" alt="{{ post_destaque.thumbnail.alt|default(post_destaque.title) }}" class="absolute inset-0 h-full w-full object-cover">
+						{% else %}
+							<div class="relative z-[2] text-center text-[#7fc4b5]">
+								<div class="text-[38px] opacity-50">⬡</div>
+								<div class="mt-2 font-mono text-[11px] uppercase tracking-[0.1em]">Imagem de capa</div>
+							</div>
+						{% endif %}
+					</div>
+					<div class="p-[26px_28px_28px]">
+						<div class="mb-3.5 flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.08em] text-muted">
+							<span class="rounded-full bg-green px-2.5 py-1 text-cyan">Em destaque</span>
+							<span class="text-green-700">{{ post_destaque.category.title|default('Tera') }}</span>
+							<span>·</span>
+							<span>{{ post_destaque.content|leitura }} min</span>
+						</div>
+						<h3 class="text-pretty mb-2.5 text-2xl font-bold leading-[1.22] tracking-[-0.02em]">{{ post_destaque.title }}</h3>
+						<p class="text-[15px] leading-relaxed text-muted">{{ post_destaque.preview.length(24).read_more(false) }}</p>
+					</div>
+				</a>
+
+				<div class="flex flex-col gap-4">
+					{% for post in posts_laterais %}
+						{% include 'partials/post-card-compact.twig' with { post: post } %}
+					{% endfor %}
+					{% if boletim_ativo %}
+						<div class="flex flex-1 flex-col justify-center gap-3 rounded-[18px] bg-green p-[22px]">
+							{% include 'partials/eyebrow.twig' with { texto: 'Boletim', on_dark: true } %}
+							<div class="font-display text-[17px] font-bold tracking-[-0.02em] text-white">Uma leitura por mês sobre a sua conta de luz.</div>
+							<a href="{{ boletim_url }}" class="tera-btn tera-btn--cyan tera-btn--sm w-fit">Assinar</a>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+		{% endif %}
+
+		{% if categorias|length %}
+			<div class="flex flex-wrap gap-2.5">
+				{% for cat in categorias %}
+					<a href="{{ cat.link }}" class="tera-tag" style="cursor:pointer">{{ cat.title }}</a>
+				{% endfor %}
+			</div>
+		{% endif %}
+	</div>
+</section>
+
+<section id="servicos" class="section border-y border-slate-200 bg-white" style="scroll-margin-top:76px">
+	<div class="wrap">
+		<div class="mb-12 max-w-[700px]">
+			{% include 'partials/eyebrow.twig' with { texto: 'O que é inteligência energética' } %}
+			<h2 class="text-balance mt-5 mb-4.5 text-[42px] font-bold leading-[1.08] tracking-[-0.025em]">Enquanto outras empresas vendem projetos, a Tera vende inteligência.</h2>
+			<p class="text-[17px] leading-relaxed text-muted">É o guarda-chuva do nosso trabalho. Abaixo dele estão os dois serviços que você contrata hoje.</p>
+		</div>
+
+		<div class="mb-14 grid grid-cols-1 gap-6 md:grid-cols-2">
+			{% for servico in servicos %}
+				<div class="tera-card flex flex-col overflow-hidden rounded-[20px] p-[30px]">
+					<span class="mb-5 w-fit rounded-full px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] {{ servico.variante == 'principal' ? 'bg-green text-cyan' : 'bg-cyan-tint text-green-700' }}">{{ servico.badge }}</span>
+					<div class="mb-5">{% include 'partials/icon-box.twig' with { icone: servico.icone, tamanho: 54 } %}</div>
+					<h3 class="mb-2.5 text-[23px] font-bold tracking-[-0.02em]">{{ servico.titulo }}</h3>
+					<p class="mb-5 text-[14.5px] leading-relaxed text-muted">{{ servico.resumo }}</p>
+					<ul class="mt-auto flex flex-col gap-2.5 border-t border-slate-100 pt-5">
+						{% for item in servico.itens %}
+							<li class="flex items-start gap-2.5 text-sm text-body">
+								<i data-lucide="check" class="mt-0.5 h-[17px] w-[17px] shrink-0 text-green-600"></i>
+								{{ item }}
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+			{% endfor %}
+		</div>
+
+		<div class="mb-9 max-w-[660px]">
+			{% include 'partials/eyebrow.twig' with { texto: 'Dúvidas' } %}
+			<h3 class="mt-4 text-[28px] font-bold leading-[1.15] tracking-[-0.025em]">O que perguntam antes de contratar.</h3>
+		</div>
+		<div class="max-w-[820px] divide-y divide-slate-200 border-t border-slate-200">
+			{% for faq in faqs %}
+				<details class="group py-1">
+					<summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5.5 font-display text-[17px] font-semibold tracking-[-0.015em] marker:content-['']">
+						{{ faq.pergunta }}
+						<span class="shrink-0 font-mono text-[19px] text-green-700 transition-transform group-open:rotate-45">+</span>
+					</summary>
+					<p class="pb-6 pr-15 text-[15px] leading-relaxed text-muted">{{ faq.resposta }}</p>
+				</details>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+
+<section id="metodo" class="section" style="scroll-margin-top:76px">
+	<div class="wrap">
+		<div class="mb-13 max-w-[660px]">
+			{% include 'partials/eyebrow.twig' with { texto: 'Como funciona' } %}
+			<h2 class="text-balance mt-5 mb-4 text-[42px] font-bold leading-[1.08] tracking-[-0.025em]">Quatro etapas, da fatura ao resultado comprovado.</h2>
+			<p class="text-[17px] leading-relaxed text-muted">Base metodológica na ISO 50002:2014. Nada é recomendado sem número que sustente.</p>
+		</div>
+		<div class="mb-10 grid grid-cols-1 gap-6.5 sm:grid-cols-2 lg:grid-cols-4">
+			{% for etapa in etapas %}
+				{% include 'partials/step.twig' with { etapa: etapa } %}
+			{% endfor %}
+		</div>
+		<div class="flex flex-wrap gap-2.5">
+			{% for norma in normas %}
+				<span class="tera-tag">{{ norma }}</span>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+
+<section class="section border-y border-slate-200 bg-white">
+	<div class="wrap">
+		<div class="mb-13 grid grid-cols-1 gap-6.5 md:grid-cols-2">
+			<div class="tera-card rounded-[20px] p-[30px_32px]">
+				<div class="mb-3.5 font-mono text-[11px] uppercase tracking-[0.12em] text-green-700">Missão</div>
+				<p class="text-[16.5px] leading-relaxed text-body">Desenvolver soluções inteligentes em energia, eficiência energética, análise de dados e transição energética que promovam desenvolvimento econômico, inclusão social e sustentabilidade.</p>
+			</div>
+			<div class="rounded-[20px] bg-green p-[30px_32px]">
+				<div class="mb-3.5 font-mono text-[11px] uppercase tracking-[0.12em] text-cyan">Visão 2040</div>
+				<p class="text-[16.5px] leading-relaxed text-white">Ser reconhecida como uma das principais empresas brasileiras de inteligência energética, referência em inovação e em projetos de transição energética para a Amazônia.</p>
+			</div>
+		</div>
+		<div class="grid grid-cols-2 gap-5 md:grid-cols-4">
+			{% for valor in valores %}
+				<div class="tera-card rounded-[18px] p-[22px_20px]">
+					<div class="mb-2 text-base font-bold tracking-[-0.02em]">{{ valor.titulo }}</div>
+					<div class="text-[13.5px] leading-relaxed text-muted">{{ valor.texto }}</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+
+<section id="sobre" class="section bg-night" style="scroll-margin-top:76px">
+	<div class="wrap">
+		<div class="grid grid-cols-1 items-center gap-15 lg:grid-cols-[0.85fr_1.15fr]">
+			<div class="flex aspect-[4/5] items-center justify-center rounded-[22px] border border-white/[0.12] bg-white/5 text-center text-[#7fc4b5]">
+				<div>
+					<div class="text-5xl opacity-50">⬡</div>
+					<div class="mt-3 font-mono text-xs uppercase tracking-[0.1em]">Inserir retrato</div>
+				</div>
+			</div>
+			<div>
+				{% include 'partials/eyebrow.twig' with { texto: 'Quem conduz', on_dark: true } %}
+				<h2 class="text-balance mt-4.5 mb-5 text-[34px] font-bold leading-[1.1] tracking-[-0.025em] text-white">Lucas Figueiredo</h2>
+				<p class="mb-4 text-base leading-[1.75] text-[#9fd6c8]">Engenheiro eletricista e mestrando pela Universidade Federal do Amazonas, com trajetória voltada ao desenvolvimento de soluções para o setor energético: transição energética, eficiência energética e acesso à energia na Amazônia.</p>
+				<p class="text-base leading-[1.75] text-[#9fd6c8]">Na prática, isso significa atendimento direto: você fala com quem faz o projeto, sem camadas de intermediários. É também quem escreve o conteúdo do blog.</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+{% if boletim_ativo %}
+<section id="boletim" class="bg-green py-19" style="scroll-margin-top:76px">
+	<div class="wrap grid grid-cols-1 items-center gap-15 lg:grid-cols-[1fr_0.9fr]">
+		<div>
+			{% include 'partials/eyebrow.twig' with { texto: 'Boletim da Tera', on_dark: true } %}
+			<h2 class="text-balance mt-4 mb-3 text-[34px] font-bold leading-[1.1] tracking-[-0.025em] text-white">Uma leitura por mês sobre o custo da sua energia.</h2>
+			<p class="text-[15.5px] leading-relaxed text-[#9fd6c8]">Reajuste tarifário, bandeiras, prazos regulatórios e um caso prático de economia. Sem propaganda.</p>
+		</div>
+		<div>
+			{% include 'partials/newsletter-form.twig' with { inscrito: inscrito } %}
+		</div>
+	</div>
+</section>
+{% endif %}
+
+<section id="contato" class="section border-t border-slate-200 bg-white" style="scroll-margin-top:76px">
+	<div class="wrap grid grid-cols-1 items-start gap-15 lg:grid-cols-[1fr_0.9fr]">
+		<div>
+			{% include 'partials/eyebrow.twig' with { texto: 'Diagnóstico' } %}
+			<h2 class="text-balance mt-4.5 mb-4.5 text-[40px] font-bold leading-[1.08] tracking-[-0.025em]">Comece pela sua conta de luz.</h2>
+			<p class="mb-7 max-w-[48ch] text-[17px] leading-relaxed text-body">O diagnóstico inicial é feito a partir das suas faturas, sem custo e sem compromisso.</p>
+			<div class="flex flex-col gap-3.5">
+				<a href="{{ contato.whatsapp_url }}" class="flex items-center gap-3 text-[15px] text-strong">
+					<span class="w-[88px] font-mono text-[11px] uppercase tracking-[0.1em] text-subtle">WhatsApp</span>
+					{{ contato.whatsapp }}
+				</a>
+				<a href="mailto:{{ contato.email }}" class="flex items-center gap-3 text-[15px] text-strong">
+					<span class="w-[88px] font-mono text-[11px] uppercase tracking-[0.1em] text-subtle">E-mail</span>
+					{{ contato.email }}
+				</a>
+				<div class="flex items-center gap-3 text-[15px] text-strong">
+					<span class="w-[88px] font-mono text-[11px] uppercase tracking-[0.1em] text-subtle">Local</span>
+					{{ contato.local }}
+				</div>
+			</div>
+		</div>
+		<div class="tera-card rounded-[22px] p-[32px_32px_28px]">
+			{% if enviado %}
+				<div class="py-9 text-center">
+					<div class="mb-2.5 text-[21px] font-bold tracking-[-0.02em]">Pedido recebido.</div>
+					<p class="mx-auto max-w-[36ch] text-[14.5px] leading-relaxed text-muted">A resposta chega em até um dia útil.</p>
+				</div>
+			{% else %}
+				<div class="mb-5 text-[21px] font-bold tracking-[-0.02em]">Solicitar diagnóstico</div>
+				<form action="{{ function('admin_url', 'admin-post.php') }}" method="post">
+					<input type="hidden" name="action" value="tera_diagnostico">
+					{{ function('wp_nonce_field', 'tera_diagnostico') }}
+					<div class="tera-field">
+						<label>Nome</label>
+						<input class="tera-input" type="text" name="nome" required placeholder="Seu nome">
+					</div>
+					<div class="tera-field">
+						<label>E-mail</label>
+						<input class="tera-input" type="email" name="email" required placeholder="seu@email.com.br">
+					</div>
+					<button type="submit" class="tera-btn tera-btn--primary mt-2 w-full justify-center">Enviar pedido <span class="arr">→</span></button>
+				</form>
+			{% endif %}
+		</div>
+	</div>
+</section>
+
+{% endblock %}

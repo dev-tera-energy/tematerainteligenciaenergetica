@@ -1,0 +1,50 @@
+{# ==========================================================
+   Rodapé institucional: quatro colunas + linha de créditos.
+   ========================================================== #}
+<footer class="bg-night px-0 pb-8 pt-[60px] text-[#93a1ac]">
+	<div class="wrap">
+		<div class="grid grid-cols-1 gap-10 border-b border-white/[0.08] pb-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
+			<div>
+				<img src="{{ logo('wordmark', 'branco') }}" alt="Tera" class="h-[30px] w-auto">
+				<p class="mt-4.5 max-w-[38ch] text-sm leading-relaxed text-[#7e8c97]">
+					Inteligência energética para comércios e indústrias, e um blog para explicar a conta de luz.
+				</p>
+			</div>
+
+			<div>
+				<h4 class="mb-4 font-mono text-xs font-medium uppercase tracking-[0.12em] text-[#cfe6df]">Site</h4>
+				<div class="flex flex-col gap-2">
+					<a href="{{ servicos_url }}" class="text-sm text-[#93a1ac] hover:text-cyan">Serviços</a>
+					<a href="{{ metodo_url }}" class="text-sm text-[#93a1ac] hover:text-cyan">Método</a>
+					<a href="{{ sobre_url }}" class="text-sm text-[#93a1ac] hover:text-cyan">Sobre</a>
+					<a href="{{ contato_url }}" class="text-sm text-[#93a1ac] hover:text-cyan">Diagnóstico</a>
+				</div>
+			</div>
+
+			<div>
+				<h4 class="mb-4 font-mono text-xs font-medium uppercase tracking-[0.12em] text-[#cfe6df]">Conteúdo</h4>
+				<div class="flex flex-col gap-2">
+					<a href="{{ blog_url }}" class="text-sm text-[#93a1ac] hover:text-cyan">Todos os artigos</a>
+					<a href="{{ artigos_tecnicos_url }}" class="text-sm text-[#93a1ac] hover:text-cyan">Artigos técnicos</a>
+					{% if boletim_ativo %}
+						<a href="{{ boletim_url }}" class="text-sm text-[#93a1ac] hover:text-cyan">Boletim mensal</a>
+					{% endif %}
+				</div>
+			</div>
+
+			<div>
+				<h4 class="mb-4 font-mono text-xs font-medium uppercase tracking-[0.12em] text-[#cfe6df]">Contato</h4>
+				<div class="flex flex-col gap-2">
+					<a href="mailto:{{ contato.email }}" class="text-sm text-[#93a1ac] hover:text-cyan">E-mail</a>
+					<a href="{{ contato.whatsapp_url }}" class="text-sm text-[#93a1ac] hover:text-cyan">WhatsApp · {{ contato.whatsapp }}</a>
+					<span class="text-sm text-[#93a1ac]">{{ contato.local }}</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="flex flex-wrap items-center justify-between gap-4 pt-6 font-mono text-xs tracking-[0.02em] text-[#6b7884]">
+			<span>© {{ ano }} Tera Inteligência Energética · {{ contato.cidade }}</span>
+			<span>{{ assinatura }}</span>
+		</div>
+	</div>
+</footer>

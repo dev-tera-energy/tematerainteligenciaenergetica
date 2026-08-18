@@ -1,0 +1,9 @@
+{% extends 'base.twig' %}
+{% block content %}
+<article class="px-6 py-20">
+	<div class="prose-tera mx-auto max-w-[820px]">
+		<h1 class="mb-8 text-[42px] font-extrabold tracking-[-0.03em]">{{ post.title }}</h1>
+		{{ post.content }}
+	</div>
+</article>
+{% endblock %}

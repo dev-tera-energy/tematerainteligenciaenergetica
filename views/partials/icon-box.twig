@@ -1,0 +1,8 @@
+{# ==========================================================
+   Caixa quadrada com ícone Lucide sobre fundo tint da marca.
+   Equivalente ao componente IconBox do design system.
+   Parâmetros: icone (chave semântica), tamanho (px, opcional, padrão 54).
+   ========================================================== #}
+<div class="flex items-center justify-center rounded-2xl bg-green-tint" style="width:{{ tamanho|default(54) }}px;height:{{ tamanho|default(54) }}px">
+	<i data-lucide="{{ icone|icone }}" class="text-green" style="width:{{ (tamanho|default(54) * 0.52)|round }}px;height:{{ (tamanho|default(54) * 0.52)|round }}px"></i>
+</div>

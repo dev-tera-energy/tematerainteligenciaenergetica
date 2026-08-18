@@ -1,0 +1,24 @@
+{# ==========================================================
+   Navbar fixa. A borda inferior aparece só depois do scroll
+   (ver src/js/navbar.js); em SSR ela começa transparente.
+   Os links de seção (Serviços, Método, Diagnóstico...) são âncoras
+   da home — a partir de outra página, apontam para lá.
+   Logo: na home, rola para o topo (sem navegar); nas demais páginas
+   (blog, artigo...), volta para a home.
+   ========================================================== #}
+<header data-tera-nav class="tera-nav">
+	<div class="wrap flex items-center justify-between gap-6">
+		<a href="{{ eh_home ? '#' : site_url }}" aria-label="{{ eh_home ? 'Voltar ao topo' : 'Tera, ir para a home' }}" class="block leading-none">
+			<img src="{{ logo('wordmark', 'gradiente') }}" alt="Tera" class="h-[30px] w-auto">
+		</a>
+
+		<nav class="hidden items-center gap-8 md:flex">
+			{% for item in (menu ? menu.items : nav_fallback) %}
+				{% set href = item.link|default(item.url) %}
+				<a href="{{ href starts with '#' ? site_url ~ href : href }}">{{ item.title|default(item.label) }}</a>
+			{% endfor %}
+		</nav>
+
+		<a href="{{ blog_url }}" class="tera-btn tera-btn--primary tera-btn--sm">Ver o blog</a>
+	</div>
+</header>

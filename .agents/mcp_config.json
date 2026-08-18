@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "wp-local": {
+      "command": "node",
+      "args": [
+        "C:\\Users\\lucas\\Local Sites\\site-tera\\wp-mcp-server\\index.js"
+      ]
+    }
+  }
+}

@@ -1,0 +1,89 @@
+{% extends 'base.twig' %}
+{% block content %}
+
+<section class="border-b border-slate-200 py-10">
+	<div class="wrap">
+		{% include 'partials/eyebrow.twig' with { texto: 'Conteúdo' } %}
+		{% if titulo_arquivo %}
+			<h1 class="text-balance mt-4.5 mb-4.5 max-w-[22ch] text-[48px] font-extrabold leading-[1.05] tracking-[-0.03em]">{{ titulo_arquivo }}</h1>
+		{% elseif termo_busca %}
+			<h1 class="text-balance mt-4.5 mb-4.5 max-w-[22ch] text-[48px] font-extrabold leading-[1.05] tracking-[-0.03em]">Resultados para "{{ termo_busca }}"</h1>
+		{% else %}
+			<h1 class="text-balance mt-4.5 mb-4.5 max-w-[22ch] text-[48px] font-extrabold leading-[1.05] tracking-[-0.03em]">Energia explicada por quem calcula.</h1>
+			<p class="max-w-[62ch] text-lg leading-relaxed text-body">Artigos técnicos, boletins de tarifa, glossário e notas sobre regulação. Escrito para quem paga a conta, não para quem escreve norma.</p>
+		{% endif %}
+	</div>
+</section>
+
+<section class="py-12 pb-25">
+	<div class="wrap grid grid-cols-1 items-start gap-11 lg:grid-cols-[0.78fr_2.22fr]">
+		<aside class="top-25 flex flex-col gap-7 lg:sticky">
+			<div>
+				<div class="mb-3.5 font-mono text-[11px] uppercase tracking-[0.1em] text-subtle">Formato</div>
+				<div class="flex flex-col gap-1">
+					<a href="{{ blog_url }}" class="flex items-center justify-between border-b border-slate-200 py-2.5 font-mono text-[13px] tracking-[0.02em] {{ not categoria_atual ? 'font-semibold text-green' : 'text-muted' }}">
+						Todos <span class="text-[11px] text-subtle">{{ posts_total }}</span>
+					</a>
+					{% for cat in categorias %}
+						<a href="{{ cat.link }}" class="flex items-center justify-between border-b border-slate-200 py-2.5 font-mono text-[13px] tracking-[0.02em] {{ categoria_atual == cat.id ? 'font-semibold text-green' : 'text-muted' }}">
+							{{ cat.title }} <span class="text-[11px] text-subtle">{{ cat.count }}</span>
+						</a>
+					{% endfor %}
+				</div>
+			</div>
+			{% if boletim_ativo %}
+				<div class="tera-card rounded-[16px] p-[22px]">
+					<div class="mb-2 font-display text-base font-bold tracking-[-0.02em]">Boletim da Tera</div>
+					<p class="mb-4 text-[13px] leading-relaxed text-muted">Um e-mail por mês com tarifa, regulação e um caso prático.</p>
+					<a href="{{ boletim_url }}" class="tera-btn tera-btn--primary tera-btn--sm w-full justify-center">Assinar</a>
+				</div>
+			{% endif %}
+		</aside>
+
+		<div>
+			{% if destaque %}
+				<a href="{{ destaque.link }}" class="tera-card tera-card--hover mb-7 grid grid-cols-1 overflow-hidden rounded-[22px] md:grid-cols-2">
+					<div class="flex flex-col p-[32px_34px]">
+						<div class="mb-4 flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.08em] text-muted">
+							<span class="rounded-full bg-green px-2.5 py-1 text-cyan">Em destaque</span>
+							<span class="text-green-700">{{ destaque.category.title|default('Tera') }}</span>
+						</div>
+						<h2 class="text-pretty mb-3 text-[26px] font-bold leading-[1.2] tracking-[-0.025em]">{{ destaque.title }}</h2>
+						<p class="mb-5 text-[14.5px] leading-relaxed text-muted">{{ destaque.preview.length(30).read_more(false) }}</p>
+						<div class="mt-auto font-mono text-[11px] tracking-[0.06em] text-subtle">{{ destaque.date('d M Y')|upper }} · {{ destaque.content|leitura }} min</div>
+					</div>
+					<div class="relative flex min-h-[260px] items-center justify-center bg-green">
+						{% if destaque.thumbnail %}
+							<img src="{{ destaque.thumbnail.src('tera-hero') }}" alt="{{ destaque.thumbnail.alt|default(destaque.title) }}" class="h-full w-full object-cover">
+						{% else %}
+							<div class="relative z-[2] text-center text-[#7fc4b5]">
+								<div class="text-[38px] opacity-50">⬡</div>
+								<div class="mt-2 font-mono text-[11px] uppercase tracking-[0.1em]">Imagem de capa</div>
+							</div>
+						{% endif %}
+					</div>
+				</a>
+			{% endif %}
+
+			{% if posts_restantes|length %}
+				<div class="grid grid-cols-1 gap-5.5 sm:grid-cols-2">
+					{% for post in posts_restantes %}
+						{% include 'partials/post-card.twig' with { post: post } %}
+					{% endfor %}
+				</div>
+			{% else %}
+				<p class="py-10 text-base text-muted">Nenhum texto nesse formato ainda. Volte em breve.</p>
+			{% endif %}
+
+			{% if posts.pagination %}
+				<div class="mt-14 flex justify-center gap-2">
+					{% for page in posts.pagination.pages %}
+						<a href="{{ page.link }}" class="rounded-full border px-4 py-2 text-sm {{ page.current ? 'border-green bg-green text-white' : 'border-slate-200 text-muted' }}">{{ page.title }}</a>
+					{% endfor %}
+				</div>
+			{% endif %}
+		</div>
+	</div>
+</section>
+
+{% endblock %}

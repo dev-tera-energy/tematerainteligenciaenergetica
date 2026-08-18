@@ -1,0 +1,15 @@
+{
+  "name": "tera/tema-institucional",
+  "description": "Tema WordPress da Tera Inteligencia Energetica (Timber + Twig)",
+  "type": "wordpress-theme",
+  "license": "proprietary",
+  "require": {
+    "php": ">=8.1",
+    "timber/timber": "^2.5"
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true
+    }
+  }
+}

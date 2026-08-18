@@ -1,0 +1,12 @@
+{% extends 'base.twig' %}
+{% block content %}
+<section class="mx-auto max-w-[720px] px-6 py-32 text-center">
+	<span class="font-mono text-sm text-green-700">404</span>
+	<h1 class="mt-4 text-4xl font-extrabold tracking-tight">Essa página não existe.</h1>
+	<p class="mt-4 text-lg text-muted">Pode ter mudado de endereço. Volte para a home ou veja o conteúdo publicado.</p>
+	<div class="mt-8 flex justify-center gap-4">
+		<a href="{{ site_url }}" class="tera-btn tera-btn--primary">Ir para a home</a>
+		<a href="{{ blog_url }}" class="tera-btn tera-btn--ghost">Ver conteúdo</a>
+	</div>
+</section>
+{% endblock %}

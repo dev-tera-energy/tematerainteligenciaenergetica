@@ -1,0 +1,14 @@
+{# ==========================================================
+   Card de post compacto, sem imagem — usado ao lado do destaque
+   na prévia de conteúdo da home.
+   Parâmetro: post (objeto Timber\Post).
+   ========================================================== #}
+<a href="{{ post.link }}" class="tera-card tera-card--hover block rounded-[18px] p-[22px]">
+	<div class="mb-3 flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.08em] text-slate-500">
+		<span class="text-green-700">{{ post.category.title|default('Tera') }}</span>
+		<span>·</span>
+		<span>{{ post.content|leitura }} min</span>
+	</div>
+	<h3 class="mb-2 text-[17px] font-bold leading-[1.3] tracking-[-0.02em] text-balance">{{ post.title }}</h3>
+	<div class="font-mono text-[11px] tracking-[0.06em] text-slate-400">{{ post.date('d M Y')|upper }}</div>
+</a>

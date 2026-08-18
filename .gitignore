@@ -1,0 +1,25 @@
+# Dependências
+node_modules/
+vendor/
+
+# Build output (regenerado por yarn dev)
+assets/css/style.css
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Obsidian (config local do usuário)
+docs/.obsidian/workspace.json
+docs/.obsidian/workspace-mobile.json
+
+# WordPress (não relevante dentro do tema)
+*.log
