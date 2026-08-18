@@ -1,25 +1,71 @@
-# Dependências
+# ==============================================================================
+# Dependências (Composer & Node)
+# ==============================================================================
 node_modules/
 vendor/
 
-# Build output (regenerado por yarn dev)
-assets/css/style.css
+# ==============================================================================
+# Logs & Arquivos Temporários
+# ==============================================================================
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+debug.log
 
-# OS
+# ==============================================================================
+# Variáveis de Ambiente & Arquivos Locais
+# ==============================================================================
+.env
+.env.local
+.env.*.local
+*.local
+
+# ==============================================================================
+# Sistema Operacional (Windows, macOS, Linux)
+# ==============================================================================
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
-Desktop.ini
+[Dd]esktop.ini
 
-# IDE
-.vscode/
+# ==============================================================================
+# IDEs & Editores (VS Code, PhpStorm, Sublime, Vim)
+# ==============================================================================
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 .idea/
+*.sublime-project
+*.sublime-workspace
 *.swp
 *.swo
 *~
 
-# Obsidian (config local do usuário)
+# ==============================================================================
+# Agentes & MCP (Configurações locais)
+# ==============================================================================
+.agents/mcp_config.json
+
+# ==============================================================================
+# Obsidian (workspace e cache local)
+# ==============================================================================
 docs/.obsidian/workspace.json
 docs/.obsidian/workspace-mobile.json
+docs/.obsidian/cache/
 
-# WordPress (não relevante dentro do tema)
-*.log
+# ==============================================================================
+# Backups e Dumps SQL
+# ==============================================================================
+*.sql
+*.sql.gz
+*.tar.gz
+*.bak
+*.backup
